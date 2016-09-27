@@ -27,7 +27,7 @@ function MTriangle(){
 
 	//var numA = parseInt(document.form1.side_a.value, 10);
 	var numA = filterInt(document.form1.side_a.value);
-	if(numA == NaN) {
+	if(isNaN(numA)) {
 		targetA.innerHTML = "整数ではありません" ;
 		exit();
 	}
