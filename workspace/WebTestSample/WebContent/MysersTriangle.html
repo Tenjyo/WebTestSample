@@ -2,9 +2,108 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>マイヤーズの三角形</title>
+
+
+
+<script type="text/javascript">
+<!--
+
+function MTriangle(){
+
+//	if(window.confirm('判定します？')){
+//		//location.href = "example_confirm.html"; // example_confirm.html へジャンプ
+//	}
+//	else{
+//		window.alert('キャンセルされました'); // 警告ダイアログを表示
+//		exit()
+//	}
+
+	// 辺Ａ
+	targetA = document.getElementById("output_a");
+	targetA.innerHTML = "OK!" ;
+	window.alert(document.form1.side_a.value); // ダイアログを表示
+
+
+	//var numA = parseInt(document.form1.side_a.value, 10);
+	var numA = filterInt(document.form1.side_a.value);
+	if(numA == NaN) {
+		targetA.innerHTML = "整数ではありません" ;
+		exit();
+	}
+
+	window.alert(numA); // ダイアログを表示
+
+
+
+//	targetA.innerHTML = "Penguin" + document.getElementById("side_a").value;
+	//var price1 = document.form1.goods1.selectedIndex * 500; // 単価を設定
+	//document.form1.field1.value = price1; // 小計を表示
+
+	// 辺Ｂ
+	//var price2 = document.form1.goods2.selectedIndex * 1000; // 単価を設定
+	//document.form1.field2.value = price2; // 小計を表示
+
+
+	// 合計を計算
+	//var total = price1 + price2 + price3;
+
+	// 設定終了
+
+
+	targetD = document.getElementById("field_Decision");
+    targetD.innerHTML = "不成立、三角形ではありません";
+
+}
+
+
+filterInt = function (value) {
+	  if(/^(\-|\+)?([0-9]+|Infinity)$/.test(value))
+	    return Number(value);
+	  return NaN;
+}
+
+// -->
+</script>
 </head>
+
+
 <body>
+<h1>マイヤーズの三角形とは</h1>
+<h2>テストで</h2>
+
+<form action="#" name="form1">
+
+<table>
+<tr>
+<th>-----</th>
+<th>辺の長さ（整数のみ）</th>
+<th><div style="text-align:center" id="output_head"></div></th>
+</tr>
+<tr>
+<td>辺Ａ</td>
+<td><input type="text" name="side_a" size="16" value="0" onChange="MTriangle()">
+<th><div style="text-align:center" id="output_a"></div></th>
+</tr>
+<tr>
+<td>辺Ｂ</td>
+<td><input type="text" name="side_c" size="16" value="0" onChange="MTriangle()">
+<th><div style="text-align:center" id="output_b"></div></th>
+</tr>
+<tr>
+<td>辺Ｃ</td>
+<td><input type="text" name="side_c" size="16" value="0" onChange="MTriangle()">
+<th><div style="text-align:center" id="output_c"></div></th>
+</tr>
+
+<tr>
+<td align="right" colspan="2"><strong>判定</strong></td>
+<td><input type="text" name="field_Decision" size="8" value=""></td>
+</tr>
+</table>
+
+</form>
+
 
 </body>
 </html>
