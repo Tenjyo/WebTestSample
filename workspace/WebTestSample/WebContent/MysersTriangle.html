@@ -5,55 +5,61 @@
 <title>マイヤーズの三角形</title>
 
 
-
 <script type="text/javascript">
 <!--
 
 function MTriangle(){
 
-//	if(window.confirm('判定します？')){
-//		//location.href = "example_confirm.html"; // example_confirm.html へジャンプ
-//	}
-//	else{
-//		window.alert('キャンセルされました'); // 警告ダイアログを表示
-//		exit()
-//	}
+	window.alert(document.form1.side_a.value); // ダイアログを表示
+
+
+	//各辺の出力先
+	targetA = document.getElementById("output_a");
+	targetB = document.getElementById("output_b");
+	targetC = document.getElementById("output_c");
+	targetA.innerHTML = "チェック中！";
+	targetB.innerHTML = "チェック中！";
+	targetC.innerHTML = "チェック中！";
 
 	// 辺Ａの処置
-	targetA = document.getElementById("output_a");
-	targetA.innerHTML = "OK!" ;
-	//window.alert(document.form1.side_a.value); // ダイアログを表示
-
-
 	//var numA = parseInt(document.form1.side_a.value, 10);
 	var numA = filterInt(document.form1.side_a.value);
 	if(isNaN(numA)) {
 		targetA.innerHTML = "整数ではありません" ;
 		exit();
 	}
-
+	if( numA < 1) {
+		targetA.innerHTML = "長さ０です";
+		exit();
+	}
+	targetA.innerHTML = "OK!" ;
 
 	// 辺Bの処置
-	targetB = document.getElementById("output_b");
-	targetB.innerHTML = "OK!" ;
-
 	var numB = filterInt(document.form1.side_b.value);
 	if(isNaN(numB)) {
 		targetB.innerHTML = "整数ではありません" ;
 		exit();
 	}
+	if (numB < 1) {
+		targetB.innerHTML = "長さ０です。";
+		exit();
+	}
+	targetB.innerHTML = "OK!" ;
 
 
 	// 辺Cの処置
-	targetC = document.getElementById("output_c");
-	targetC.innerHTML = "OK!" ;
-
 	var numC = filterInt(document.form1.side_c.value);
 	if(isNaN(numC)) {
 		targetC.innerHTML = "整数ではありません" ;
 		exit();
 	}
+	if (numC < 1) {
+		targetC.innerHTML = "長さ０です。"
+		exit();
+	}
+	targetC.innerHTML = "OK!" ;
 
+	//window.alert(document.form1.side_a.value); // ダイアログを表示
 
 	//
 	//判定
@@ -61,6 +67,7 @@ function MTriangle(){
 	targetD.innerHTML = "判定不能！";
 
 	var total = numA + numB + numC;
+
 //	window.alert(total); // ダイアログを表示
 
 //	window.alert(targetD.value); // ダイアログを表示
@@ -77,17 +84,12 @@ function MTriangle(){
 
 	} else {
 	    targetD.innerHTML = "不成立、三角形ではありません";
-
 	}
-
-
 
 	//var price1 = document.form1.goods1.selectedIndex * 500; // 単価を設定
 	//document.form1.field1.value = price1; // 小計を表示
 	// 合計を計算
 	//var total = price1 + price2 + price3;
-
-	// 設定終了
 
 
 }
@@ -99,7 +101,7 @@ filterInt = function (value) {
 	  return NaN;
 }
 
-// -->
+-->
 </script>
 </head>
 
