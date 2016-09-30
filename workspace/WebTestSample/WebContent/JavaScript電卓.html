@@ -1,0 +1,56 @@
+<html><meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<head>
+<title>JavaScript講習</title>
+
+<script type="text/javascript" src="javascript電卓.js"></script>
+
+</head>
+
+<body>
+<h1>JavaScript電卓</h1>
+<hr>
+
+
+<form name = "Calc" action="" id="C_FORM">
+<!-- テスト用サンプル -->
+<h5>コピー元</h5>
+<input type="text" id="COPYTEXTFROM" value="" size="32" ">
+<br>
+<input type="button" value="コピーできます" onClick="text_copy(1)">
+<h5>コピー先</h5>
+<input type="text" id="COPYTEXTO" value="" size="32">
+
+<br>
+<br>
+<hr>
+
+<!-- 計算結果 -->
+<input type="text" id="CDISP" value="0" size="32" onChange="sub_seg_copy()"> 計算欄<br>
+<!-- ボタン -->
+<input type="button" value="電卓のボタン">
+<input type="button" value="AC" id="AC">
+<input type="button" value="1" id="Fig1">
+
+<a href="javascript:clearen('clear')">C</a>
+<a href="javascript:clearen('sclear')">CE</a> <br>
+
+<a href="javascript:suji('1')">1</a> <a href="javascript:suji('2')">2</a> <a href="javascript:suji('3')">3</a>
+<br>
+<a href="javascript:suji('4')">4</a> <a href="javascript:suji('5')">5</a> <a href="javascript:suji('6')">6</a> <a href="javascript:suji('7')">7</a> <a href="javascript:suji('8')">8</a> <a href="javascript:suji('9')">9</a> <a href="javascript:suji('0')">0</a> <a href="javascript:suji('.')">.</a> <br>
+
+
+<hr>
+
+</form>
+
+<form name = "F1" id="SAMPLE">
+カラムの数
+<input type = text id="inp1" value = 1 onChange="createtab(this.form.inp1.value, this.form.inp2.value, this)">
+ローの数
+<input type = text id="inp2" value = 1 onChange="createtab(this.form.inp1.value, this.form.inp2.value, this)">
+
+<input type = button name="b1" id="b1" value = "表のクリア" onClick="tblclear(this)">
+</form>
+<hr>
+</body>
+</html>
