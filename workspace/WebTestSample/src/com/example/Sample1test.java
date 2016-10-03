@@ -2,11 +2,11 @@ package com.example;
 
 import static org.junit.Assert.*;
 
-import java.io.File;
+import java.util.MissingResourceException;
 import java.util.NoSuchElementException;
+import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.commons.lang3.SystemUtils;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -21,8 +21,25 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Sample1test {
 
+	private WebDriver driver;
+	static private String baseUrl;
+    static ResourceBundle bundle = null;
+
+	private StringBuffer verificationErrors = new StringBuffer();
+
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+
+	    try {
+	        bundle = ResourceBundle.getBundle("webdriver");
+			System.setProperty("webdriver.chrome.driver", bundle.getString("chromedriverpath"));
+
+			baseUrl = "file:///C:/e46p/Selenium";	//
+
+	    } catch (MissingResourceException e) {
+	        e.printStackTrace();
+	    }
 	}
 
 	@AfterClass
@@ -30,28 +47,14 @@ public class Sample1test {
 	}
 
 
-	private WebDriver driver;
-	private String baseUrl;
-	private StringBuffer verificationErrors = new StringBuffer();
-
-    private String chromeDriverPath() {
-        String path;
-        if (SystemUtils.IS_OS_MAC || SystemUtils.IS_OS_MAC_OSX) {
-            path = "chromedriver/mac/chromedriver"; // Mac環境の場合
-        } else {
-            path = "chromedriver/win/chromedriver.exe"; // Windows環境の場合
-        }
-        File file = new File(path);
-        return file.getAbsolutePath();
-    }
 
 
     @Before
     public void setUp() {
-		System.setProperty("webdriver.chrome.driver", "C:/e46p/chromedriver.exe");
-        //System.setProperty("webdriver.chrome.driver", chromeDriverPath());
-        driver = new ChromeDriver();
-		baseUrl = "file:///C:/e46p/Selenium";	//
+	//	System.setProperty("webdriver.chrome.driver", "C:/e46p/chromedriver.exe");
+    //    //System.setProperty("webdriver.chrome.driver", chromeDriverPath());
+    	driver = new ChromeDriver();
+
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 

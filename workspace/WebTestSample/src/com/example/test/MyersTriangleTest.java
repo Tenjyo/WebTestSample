@@ -3,6 +3,8 @@ package com.example.test;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
@@ -18,13 +20,27 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class MyersTriangleTest {
 
-
 	private WebDriver driver;
-	private String baseUrl;
-	private StringBuffer verificationErrors = new StringBuffer();
+	static private String baseUrl;
+    static ResourceBundle bundle = null;
+
+    private StringBuffer verificationErrors = new StringBuffer();
+
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+
+	    try {
+	        bundle = ResourceBundle.getBundle("webdriver");
+
+			System.setProperty("webdriver.chrome.driver", bundle.getString("chromedriverpath"));
+
+	        baseUrl = bundle.getString("baseUrl");
+
+
+	    } catch (MissingResourceException e) {
+	        e.printStackTrace();
+	    }
 	}
 
 	@AfterClass
@@ -33,10 +49,14 @@ public class MyersTriangleTest {
 
 	@Before
 	public void setUp() throws Exception {
-		  System.setProperty("webdriver.chrome.driver", "C:/e46p/chromedriver.exe");
-	        driver = new ChromeDriver();
-			baseUrl = "file:///C:/Users/O890379/git/WebTestSample/workspace/WebTestSample/WebContent";	//
-			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		//String value = bundle.getString("chromedriverpath");
+		//System.setProperty("webdriver.chrome.driver", "C:/e46p/chromedriver.exe");
+
+		driver = new ChromeDriver();
+
+//		baseUrl = "file:///C:/Users/O890379/git/WebTestSample/workspace/WebTestSample/WebContent";	//
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
 	}
 
 	@After
@@ -51,6 +71,7 @@ public class MyersTriangleTest {
 
 	@Test
 	public void Test1() throws Exception {
+
 		Wait<WebDriver> wait = new WebDriverWait(driver, 30);
 
 		driver.get(baseUrl + "/MysersTriangle.html");
