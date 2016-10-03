@@ -61,7 +61,7 @@ public class MyersTriangleTest {
 
 	@After
 	public void tearDown() throws Exception {
-		//driver.quit();	//本当は必要、ブラウザ表示を残すためにコメント化
+		driver.quit();	//本当は必要、ブラウザ表示を残すためにコメント化
 		String verificationErrorString = verificationErrors.toString();
 		if (!"".equals(verificationErrorString)) {
 			fail(verificationErrorString);
@@ -70,20 +70,78 @@ public class MyersTriangleTest {
 
 
 	@Test
-	public void Test1() throws Exception {
+	public void TestSample1() throws Exception {
 
 		Wait<WebDriver> wait = new WebDriverWait(driver, 30);
 
 		driver.get(baseUrl + "/MysersTriangle.html");
 		driver.findElement(By.name("side_a")).clear();
 		driver.findElement(By.name("side_a")).sendKeys("3\n");
-		driver.findElement(By.name("output_a")).getText();
-		assertThat("OK!", is(driver.findElement(By.id("output_a")).getText()));
-
+		driver.findElement(By.id("output_a")).getText();
+		assertThat( driver.findElement(By.id("output_a")).getText(), is("OK!"));
 
 		// ERROR: Caught exception [ERROR: Unsupported command [getAlert]]
 
 		//wait.until(ExpectedConditions.titleContains("Selenium テスト sample"));
+
+	}
+
+
+	@Test
+	public void inital_page1() {
+
+		Wait<WebDriver> wait = new WebDriverWait(driver, 30);
+
+		driver.get(baseUrl + "/MysersTriangle.html");
+
+		//初期表示のチェック
+		assertThat(driver.findElement(By.id("field_Decision")).getText(),  is("？"));
+		assertThat(driver.findElement(By.name("side_a")).getText(),is("0"));
+		assertThat(driver.findElement(By.name("side_b")).getText(),is("0"));
+		assertThat(driver.findElement(By.name("side_b")).getText(),is("0"));
+
+		assertThat(driver.findElement(By.id("output_a")).getText(),is(""));
+		assertThat(driver.findElement(By.id("output_b")).getText(),is(""));
+		assertThat(driver.findElement(By.id("output_b")).getText(),is(""));
+	}
+
+
+	@Test
+	public void Test2() throws Exception {
+
+		Wait<WebDriver> wait = new WebDriverWait(driver, 30);
+
+		driver.get(baseUrl + "/MysersTriangle.html");
+
+		//初期表示のチェック
+		assertThat("？", is(driver.findElement(By.id("field_Decision")).getText()));
+
+		driver.findElement(By.name("side_b")).clear();
+		driver.findElement(By.name("side_b")).sendKeys("3\n");
+		driver.findElement(By.id("output_b")).getText();
+
+		assertThat(driver.findElement(By.id("output_a")).getText(), is("長さ０です"));
+		assertThat(driver.findElement(By.id("output_b")).getText(), is("チェック中！"));
+		assertThat(driver.findElement(By.id("output_c")).getText(), is("チェック中！"));
+		assertThat(driver.findElement(By.id("field_Decision")).getText(),is("未確定です。"));
+
+
+		driver.findElement(By.name("side_a")).clear();
+		driver.findElement(By.name("side_a")).sendKeys("3\n");
+		driver.findElement(By.id("output_a")).getText();
+		assertThat(driver.findElement(By.id("output_a")).getText(), is("OK!"));
+		assertThat(driver.findElement(By.id("output_b")).getText(), is("OK!"));
+		assertThat(driver.findElement(By.id("output_c")).getText(), is("長さ０です"));
+		assertThat(driver.findElement(By.id("field_Decision")).getText(),is("未確定です。"));
+;
+
+		driver.findElement(By.name("side_c")).clear();
+		driver.findElement(By.name("side_c")).sendKeys("3\n");
+		driver.findElement(By.id("output_c")).getText();
+		assertThat(driver.findElement(By.id("output_a")).getText(), is("OK!"));
+		assertThat(driver.findElement(By.id("output_b")).getText(), is("OK!"));
+		assertThat(driver.findElement(By.id("output_c")).getText(), is("OK!"));
+		assertThat(driver.findElement(By.id("field_Decision")).getText(),is("正三角形です"));
 
 	}
 
