@@ -16,9 +16,12 @@ function MTriangle(){
 	targetA = document.getElementById("output_a");
 	targetB = document.getElementById("output_b");
 	targetC = document.getElementById("output_c");
+	targetD = document.getElementById("field_Decision");
+
 	targetA.innerHTML = "チェック中！";
 	targetB.innerHTML = "チェック中！";
 	targetC.innerHTML = "チェック中！";
+	targetD.innerHTML = "未確定です。";
 
 	// 辺Ａの処置
 	//var numA = parseInt(document.form1.side_a.value, 10);
@@ -40,7 +43,7 @@ function MTriangle(){
 		exit();
 	}
 	if (numB < 1) {
-		targetB.innerHTML = "長さ０です。";
+		targetB.innerHTML = "長さ０です。";		//bug
 		exit();
 	}
 	targetB.innerHTML = "OK!" ;
@@ -62,7 +65,7 @@ function MTriangle(){
 
 	//
 	//判定
-	targetD = document.getElementById("field_Decision");
+
 	targetD.innerHTML = "判定不能！";
 
 	var total = numA + numB + numC;
@@ -124,10 +127,10 @@ filterInt = function (value) {
 </tr>
 
 <tr>
-<td align="right" colspan="2"><strong>判定はいかに！</strong></td>
+<td align="right" colspan="2"><strong>判定は、</strong></td>
 <td>
-	<input type="text" name="input_Decision" id="input_Decision" size="16" value="未設定です．">
-	<div style="text-align:center" id="field_Decision"></div>
+<!--	<input type="text" name="input_Decision" id="input_Decision" size="16" value="未設定です．"> -->
+	<div style="text-align:center" id="field_Decision">？</div>
 	</td>
 </tr>
 </table>
@@ -137,7 +140,7 @@ filterInt = function (value) {
 <br>
 <hr>
 <h3> マイヤーズの三角形とは </h3>
-<h4>3辺の長さを入力、三角形の種類を判定し、結果を表示する。</h4>
+<h4>３辺の長さを入力、三角形の種類を判定し、結果を表示する。</h4>
 <div>テストケース設定のサンプル</div>
 <div>判定は４種類　【不等辺三角形、二等辺三角形、正三角形、不成立(三角形にはならない）】</div>
 <div>成立条件は、３辺のどの辺の長さも他の２辺の長さの和より小さいこと（ a < b+c かつ b < a+c かつ c < a+b ）</div>

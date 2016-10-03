@@ -96,13 +96,16 @@ public class MyersTriangleTest {
 
 		//初期表示のチェック
 		assertThat(driver.findElement(By.id("field_Decision")).getText(),  is("？"));
-		assertThat(driver.findElement(By.name("side_a")).getText(),is("0"));
-		assertThat(driver.findElement(By.name("side_b")).getText(),is("0"));
-		assertThat(driver.findElement(By.name("side_b")).getText(),is("0"));
+		assertThat(driver.findElement(By.name("side_a")).getAttribute("value"), is("0"));
+		assertThat(driver.findElement(By.name("side_b")).getAttribute("value"), is("0"));
+		assertThat(driver.findElement(By.name("side_c")).getAttribute("value"), is("0"));
+		//assertThat(driver.findElement(By.name("side_a")).getText(), is("0"));
+		//assertThat(driver.findElement(By.name("side_b")).getText(), is("0"));
+		//assertThat(driver.findElement(By.name("side_b")).getText(), is("0"));
 
-		assertThat(driver.findElement(By.id("output_a")).getText(),is(""));
-		assertThat(driver.findElement(By.id("output_b")).getText(),is(""));
-		assertThat(driver.findElement(By.id("output_b")).getText(),is(""));
+		assertThat(driver.findElement(By.id("output_a")).getText(), is(""));
+		assertThat(driver.findElement(By.id("output_b")).getText(), is(""));
+		assertThat(driver.findElement(By.id("output_b")).getText(), is(""));
 	}
 
 
@@ -125,15 +128,20 @@ public class MyersTriangleTest {
 		assertThat(driver.findElement(By.id("output_c")).getText(), is("チェック中！"));
 		assertThat(driver.findElement(By.id("field_Decision")).getText(),is("未確定です。"));
 
+		assertThat(driver.findElement(By.name("side_b")).getAttribute("value"), is("3"));
+
 
 		driver.findElement(By.name("side_a")).clear();
 		driver.findElement(By.name("side_a")).sendKeys("3\n");
 		driver.findElement(By.id("output_a")).getText();
 		assertThat(driver.findElement(By.id("output_a")).getText(), is("OK!"));
 		assertThat(driver.findElement(By.id("output_b")).getText(), is("OK!"));
-		assertThat(driver.findElement(By.id("output_c")).getText(), is("長さ０です"));
+		assertThat(driver.findElement(By.id("output_c")).getText(), is("長さ０です。"));
 		assertThat(driver.findElement(By.id("field_Decision")).getText(),is("未確定です。"));
-;
+
+		assertThat(driver.findElement(By.name("side_a")).getAttribute("value"), is("3"));
+		assertThat(driver.findElement(By.name("side_b")).getAttribute("value"), is("3"));
+
 
 		driver.findElement(By.name("side_c")).clear();
 		driver.findElement(By.name("side_c")).sendKeys("3\n");

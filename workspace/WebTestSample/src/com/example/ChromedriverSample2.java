@@ -32,18 +32,11 @@ public class ChromedriverSample2 {
 		try {
 			bundle = ResourceBundle.getBundle("webdriver");
 			System.setProperty("webdriver.chrome.driver", bundle.getString("chromedriverpath"));
+
 		} catch (MissingResourceException e) {
 			e.printStackTrace();
 		}
 
-		//String val = bundle.getString("chromedriverpath");
-		//System.out.println(val);
-		//String val = "C:/e46p/chromedriver.exe";
-
-		System.setProperty("webdriver.chrome.driver", bundle.getString("chromedriverpath"));
-
-		//System.setProperty("webdriver.chrome.driver", "C:/e46p/chromedriver.exe");
-		//System.out.println(System.getProperty("webdriver.chrome.driver"));
 	}
 
 	@After
@@ -82,7 +75,5 @@ public class ChromedriverSample2 {
 		}
 
 	}
-
-
 
 }
