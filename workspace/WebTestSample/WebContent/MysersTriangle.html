@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>マイヤーズの三角形</title>
 
+
 <script type="text/javascript">
 <!--
 
@@ -84,16 +85,9 @@ function MTriangle(){
 	} else {
 	    targetD.innerHTML = "不成立、三角形ではありません";
 	}
-
-	//var price1 = document.form1.goods1.selectedIndex * 500; // 単価を設定
-	//document.form1.field1.value = price1; // 小計を表示
-	// 合計を計算
-	//var total = price1 + price2 + price3;
-
-
 }
 
-
+//整数かどうか判定する。
 filterInt = function (value) {
 	  if(/^(\-|\+)?([0-9]+|Infinity)$/.test(value))
 	    return Number(value);
@@ -106,8 +100,7 @@ filterInt = function (value) {
 
 
 <body>
-<h1>マイヤーズの三角形とは</h1>
-<h2>テストで</h2>
+<h1>マイヤーズの三角形</h1>
 
 <form action="#" name="form1">
 
@@ -134,7 +127,7 @@ filterInt = function (value) {
 </tr>
 
 <tr>
-<td align="right" colspan="2"><strong>判定</strong></td>
+<td align="right" colspan="2"><strong>判定はいかに！</strong></td>
 <td>
 	<input type="text" name="input_Decision" id="input_Decision" size="16" value="未設定です．">
 	<div style="text-align:center" id="field_Decision"></div>
@@ -142,9 +135,16 @@ filterInt = function (value) {
 </tr>
 </table>
 
-<div>判定はいかに！</div>
-
 </form>
+
+<br>
+<hr>
+<h3> マイヤーズの三角形とは </h3>
+<h4>3辺の長さを入力、三角形の種類を判定し、結果を表示する。</h4>
+<div>テストケース設定のサンプル</div>
+<div>判定は４種類　【不等辺三角形、二等辺三角形、正三角形、不成立(三角形にはならない）】</div>
+<div>成立条件は、３辺のどの辺の長さも他の２辺の長さの和より小さいこと（ a < b+c かつ b < a+c かつ c < a+b ）</div>
+<div>実装の制限：入力可能な辺の長さは整数のみ。</div>
 
 
 </body>
