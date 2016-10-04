@@ -15,28 +15,26 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class MyersTriangleTest {
 
-	private WebDriver driver;
+	WebDriver driver;
 	static private String baseUrl;
     static ResourceBundle bundle = null;
 
     private StringBuffer verificationErrors = new StringBuffer();
-
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 
 	    try {
 	        bundle = ResourceBundle.getBundle("webdriver");
-
 			System.setProperty("webdriver.chrome.driver", bundle.getString("chromedriverpath"));
 
 	        baseUrl = bundle.getString("baseUrl");
-
 
 	    } catch (MissingResourceException e) {
 	        e.printStackTrace();
@@ -49,14 +47,8 @@ public class MyersTriangleTest {
 
 	@Before
 	public void setUp() throws Exception {
-		//String value = bundle.getString("chromedriverpath");
-		//System.setProperty("webdriver.chrome.driver", "C:/e46p/chromedriver.exe");
-
 		driver = new ChromeDriver();
-
-//		baseUrl = "file:///C:/Users/O890379/git/WebTestSample/workspace/WebTestSample/WebContent";	//
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-
 	}
 
 	@After
@@ -70,7 +62,7 @@ public class MyersTriangleTest {
 
 
 	@Test
-	public void TestSample1() throws Exception {
+	public void smokeTest1() throws Exception {
 
 		Wait<WebDriver> wait = new WebDriverWait(driver, 30);
 
@@ -80,15 +72,13 @@ public class MyersTriangleTest {
 		driver.findElement(By.id("output_a")).getText();
 		assertThat( driver.findElement(By.id("output_a")).getText(), is("OK!"));
 
-		// ERROR: Caught exception [ERROR: Unsupported command [getAlert]]
-
-		//wait.until(ExpectedConditions.titleContains("Selenium テスト sample"));
+		wait.until(ExpectedConditions.titleContains("マイヤーズの三角形"));
 
 	}
 
 
 	@Test
-	public void inital_page1() {
+	public void inital_Display1() {
 
 		Wait<WebDriver> wait = new WebDriverWait(driver, 30);
 
@@ -106,11 +96,13 @@ public class MyersTriangleTest {
 		assertThat(driver.findElement(By.id("output_a")).getText(), is(""));
 		assertThat(driver.findElement(By.id("output_b")).getText(), is(""));
 		assertThat(driver.findElement(By.id("output_b")).getText(), is(""));
+
+		wait.until(ExpectedConditions.titleContains("マイヤーズの三角形"));
 	}
 
 
 	@Test
-	public void Test2() throws Exception {
+	public void Check_Conditions1() throws Exception {
 
 		Wait<WebDriver> wait = new WebDriverWait(driver, 30);
 

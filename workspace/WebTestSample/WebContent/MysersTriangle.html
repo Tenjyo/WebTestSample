@@ -28,7 +28,7 @@ function MTriangle(){
 	var numA = filterInt(document.form1.side_a.value);
 	if(isNaN(numA)) {
 		targetA.innerHTML = "整数ではありません" ;
-		exit();
+		exit();				//チェックエラーで中断！？←実装を知らないとテストが書けなくなる原因(他にもあり)
 	}
 	if( numA < 1) {
 		targetA.innerHTML = "長さ０です";
