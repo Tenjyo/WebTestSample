@@ -1,0 +1,27 @@
+Selenium Webdriver IE11 設定
+
+○インターネットオプションの、セキュリティタブ
+
+○インターネットオプションの、詳細タブ
+
+
+
+○レジストリ
+
+
+＜32ビット版の場合＞
+\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Internet Explorer\MAIN\FeatureControl\FEATURE_BFCACHE
+
+＜64ビット版の場合＞
+\HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Internet Explorer\MAIN\FeatureControl\FEATURE_BFCACHE
+
+なければFEATURE_BFCACHEを下記の手順で作成します。
+
+FeatureControlの上で、右クリックから
+新規　→　キーを選択
+FEATURE_BFCACHEという名前でキーを作成します。
+
+作成したキーFEATURE_BFCACHEの上で、右クリックから
+新規　→　DWORD（32ビット）値（D）
+iexplore.exeというDWORD値を作成し、値を0にします。
+

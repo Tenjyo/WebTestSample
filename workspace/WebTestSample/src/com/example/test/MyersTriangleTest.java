@@ -15,10 +15,17 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+//sahagin Seleniumテストのドキュメンテーション
+//import org.sahagin.runlib.external.PageDoc;
+//import org.sahagin.runlib.external.TestDoc;
+//import org.sahagin.runlib.external.adapter.webdriver.WebDriverAdapter;
 
+
+//@PageDoc("マイヤーズの三角形/ページ")
 public class MyersTriangleTest {
 
 	WebDriver driver;
@@ -33,6 +40,8 @@ public class MyersTriangleTest {
 	    try {
 	        bundle = ResourceBundle.getBundle("webdriver");
 			System.setProperty("webdriver.chrome.driver", bundle.getString("chromedriverpath"));
+			System.setProperty("webdriver.ie.driver",bundle.getString("iedriverpath"));
+			//System.setProperty( InternetExplorerDriverService.IE_DRIVER_EXE_PROPERTY,bundle.getString("iedriverpath"));
 
 	        baseUrl = bundle.getString("baseUrl");
 
@@ -47,9 +56,20 @@ public class MyersTriangleTest {
 
 	@Before
 	public void setUp() throws Exception {
-		driver = new ChromeDriver();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
+		if("IE".equals(bundle.getString("driverselect"))){
+			driver = new InternetExplorerDriver();
+		} else
+		if("Chrome".equals(bundle.getString("driverselect"))){
+			driver = new ChromeDriver();
+		} else {
+			driver = new InternetExplorerDriver();
+		}
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+
+//		WebDriverAdapter.setAdapter(driver);	//for sahagin
 	}
+
 
 	@After
 	public void tearDown() throws Exception {
@@ -61,18 +81,27 @@ public class MyersTriangleTest {
 	}
 
 
+//	@TestDoc("スモークテスト：「{name}」をセットする")
 	@Test
 	public void smokeTest1() throws Exception {
 
 		Wait<WebDriver> wait = new WebDriverWait(driver, 30);
 
-		driver.get(baseUrl + "/MysersTriangle.html");
+		driver.get(baseUrl + "/MyersTriangle.html");
+
+		String currentUrl = driver.getCurrentUrl();
+
+//		assertThat(currentUrl, startsWith("http://"));
+
+
+		wait.until(ExpectedConditions.titleContains("マイヤーズの三角形"));
+
 		driver.findElement(By.name("side_a")).clear();
 		driver.findElement(By.name("side_a")).sendKeys("3\n");
 		driver.findElement(By.id("output_a")).getText();
 		assertThat( driver.findElement(By.id("output_a")).getText(), is("OK!"));
 
-		wait.until(ExpectedConditions.titleContains("マイヤーズの三角形"));
+		//wait.until(ExpectedConditions.titleContains("マイヤーズの三角形"));
 
 	}
 
@@ -82,7 +111,8 @@ public class MyersTriangleTest {
 
 		Wait<WebDriver> wait = new WebDriverWait(driver, 30);
 
-		driver.get(baseUrl + "/MysersTriangle.html");
+		driver.get(baseUrl + "/MyersTriangle.html");
+		wait.until(ExpectedConditions.titleContains("マイヤーズの三角形"));
 
 		//初期表示のチェック
 		assertThat(driver.findElement(By.id("field_Decision")).getText(),  is("？"));
@@ -102,11 +132,53 @@ public class MyersTriangleTest {
 
 
 	@Test
+	public void Normal1() throws Exception {
+
+		Wait<WebDriver> wait = new WebDriverWait(driver, 20);
+
+		driver.get(baseUrl + "/MyersTriangle.html");
+		wait.until(ExpectedConditions.titleContains("マイヤーズの三角形"));
+
+		//初期表示のチェック
+		//※ページオブジェクトパターンで、チェック用のメソッド呼び出し（未実装）
+
+
+		driver.findElement(By.name("side_a")).clear();
+
+		driver.findElement(By.name("side_a")).sendKeys("33\n");
+		assertThat(driver.findElement(By.name("side_a")).getAttribute("value"), is("33"));
+		assertThat(driver.findElement(By.id("output_a")).getText(), is("OK!"));
+		assertThat(driver.findElement(By.id("output_b")).getText(), is("長さ０です。"));
+		assertThat(driver.findElement(By.id("output_c")).getText(), is("チェック中！"));
+		assertThat(driver.findElement(By.id("field_Decision")).getText(),is("未確定です。"));
+
+		driver.findElement(By.name("side_b")).clear();
+
+		driver.findElement(By.name("side_b")).sendKeys("33\n");
+		assertThat(driver.findElement(By.name("side_b")).getAttribute("value"), is("33"));
+		assertThat(driver.findElement(By.id("output_a")).getText(), is("OK!"));
+		assertThat(driver.findElement(By.id("output_b")).getText(), is("OK!"));
+		assertThat(driver.findElement(By.id("output_c")).getText(), is("長さ０です。"));
+		assertThat(driver.findElement(By.id("field_Decision")).getText(),is("未確定です。"));
+
+		driver.findElement(By.name("side_c")).clear();
+
+		driver.findElement(By.name("side_c")).sendKeys("33\n");
+		assertThat(driver.findElement(By.name("side_c")).getAttribute("value"), is("33"));
+		assertThat(driver.findElement(By.id("output_a")).getText(), is("OK!"));
+		assertThat(driver.findElement(By.id("output_b")).getText(), is("OK!"));
+		assertThat(driver.findElement(By.id("output_c")).getText(), is("OK!"));
+		assertThat(driver.findElement(By.id("field_Decision")).getText(),is("正三角形です"));
+
+	}
+
+
+	@Test
 	public void Check_Conditions1() throws Exception {
 
-		Wait<WebDriver> wait = new WebDriverWait(driver, 30);
+		Wait<WebDriver> wait = new WebDriverWait(driver, 20);
 
-		driver.get(baseUrl + "/MysersTriangle.html");
+		driver.get(baseUrl + "/MyersTriangle.html");
 
 		//初期表示のチェック
 		assertThat("？", is(driver.findElement(By.id("field_Decision")).getText()));
