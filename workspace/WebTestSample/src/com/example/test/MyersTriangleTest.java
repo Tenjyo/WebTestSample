@@ -128,6 +128,19 @@ public class MyersTriangleTest {
 		assertThat(driver.findElement(By.id("output_b")).getText(), is(""));
 
 		wait.until(ExpectedConditions.titleContains("マイヤーズの三角形"));
+
+//
+		System.out.println("font color =" + driver.findElement(By.id("output_a")).getCssValue("font-color"));
+		System.out.println("font color =" + driver.findElement(By.id("output_a")).getCssValue("color"));
+		System.out.println("font color =" + driver.findElement(By.id("output_a")).getAttribute("color"));
+		System.out.println("font color =" + driver.findElement(By.id("output_a")).getAttribute("font-color"));
+		System.out.println("text =" + driver.findElement(By.id("output_a")).getText());
+		System.out.println("font color =" + driver.findElement(By.xpath("//h4")).getCssValue("font-color"));
+		System.out.println("font color =" + driver.findElement(By.xpath("//h4")).getCssValue("color"));
+		System.out.println("value =" + driver.findElement(By.xpath("//h4")).getAttribute("value"));
+		System.out.println("text =" + driver.findElement(By.xpath("//h4")).getText());
+//
+
 	}
 
 
