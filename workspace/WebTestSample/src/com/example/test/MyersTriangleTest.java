@@ -71,7 +71,7 @@ public class MyersTriangleTest {
 
 //		WebDriverAdapter.setAdapter(driver);	//for sahagin
 
-		Wait<WebDriver> wait = new WebDriverWait(driver, 10);
+		wait = new WebDriverWait(driver, 10);
 	}
 
 
@@ -200,11 +200,11 @@ public class MyersTriangleTest {
 
 		driver.findElement(By.name("side_b")).clear();
 
-		driver.findElement(By.name("side_b")).sendKeys("33\n");
-		assertThat(driver.findElement(By.name("side_b")).getAttribute("value"), is("33"));
-		assertThat(driver.findElement(By.id("output_a")).getText(), is("長さ０です。"));
-		assertThat(driver.findElement(By.id("output_b")).getText(), is("OK!"));
-		assertThat(driver.findElement(By.id("output_c")).getText(), is("長さ０です。"));
+		driver.findElement(By.name("side_b")).sendKeys("337\n");
+		assertThat(driver.findElement(By.name("side_b")).getAttribute("value"), is("337"));
+		assertThat(driver.findElement(By.id("output_a")).getText(), is("長さ０です"));
+		assertThat(driver.findElement(By.id("output_b")).getText(), is("チェック中！"));
+		assertThat(driver.findElement(By.id("output_c")).getText(), is("チェック中！"));
 		assertThat(driver.findElement(By.id("field_Decision")).getText(),is("未確定です。"));
 
 
@@ -214,13 +214,13 @@ public class MyersTriangleTest {
 		assertThat(driver.findElement(By.name("side_a")).getAttribute("value"), is("666"));
 		assertThat(driver.findElement(By.id("output_a")).getText(), is("OK!"));
 		assertThat(driver.findElement(By.id("output_b")).getText(), is("OK!"));
-		assertThat(driver.findElement(By.id("output_c")).getText(), is("チェック中！"));
+		assertThat(driver.findElement(By.id("output_c")).getText(), is("長さ０です。"));
 		assertThat(driver.findElement(By.id("field_Decision")).getText(),is("未確定です。"));
 
 		driver.findElement(By.name("side_c")).clear();
 
-		driver.findElement(By.name("side_c")).sendKeys("33\n");
-		assertThat(driver.findElement(By.name("side_c")).getAttribute("value"), is("33"));
+		driver.findElement(By.name("side_c")).sendKeys("337\n");
+		assertThat(driver.findElement(By.name("side_c")).getAttribute("value"), is("337"));
 		assertThat(driver.findElement(By.id("output_a")).getText(), is("OK!"));
 		assertThat(driver.findElement(By.id("output_b")).getText(), is("OK!"));
 		assertThat(driver.findElement(By.id("output_c")).getText(), is("OK!"));
