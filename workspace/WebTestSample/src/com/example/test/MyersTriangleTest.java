@@ -32,6 +32,8 @@ public class MyersTriangleTest {
 	static private String baseUrl;
     static ResourceBundle bundle = null;
 
+	Wait<WebDriver> wait;
+
     private StringBuffer verificationErrors = new StringBuffer();
 
 	@BeforeClass
@@ -68,6 +70,8 @@ public class MyersTriangleTest {
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 
 //		WebDriverAdapter.setAdapter(driver);	//for sahagin
+
+		wait = new WebDriverWait(driver, 10);
 	}
 
 
@@ -182,6 +186,46 @@ public class MyersTriangleTest {
 		assertThat(driver.findElement(By.id("output_b")).getText(), is("OK!"));
 		assertThat(driver.findElement(By.id("output_c")).getText(), is("OK!"));
 		assertThat(driver.findElement(By.id("field_Decision")).getText(),is("正三角形です"));
+
+	}
+
+	@Test
+	public void Normal2() throws Exception {
+
+		driver.get(baseUrl + "/MyersTriangle.html");
+		wait.until(ExpectedConditions.titleContains("マイヤーズの三角形"));
+
+		//初期表示のチェック
+		//※ページオブジェクトパターンで、チェック用のメソッド呼び出し（未実装）
+
+		driver.findElement(By.name("side_b")).clear();
+
+		driver.findElement(By.name("side_b")).sendKeys("337\n");
+		assertThat(driver.findElement(By.name("side_b")).getAttribute("value"), is("337"));
+		assertThat(driver.findElement(By.id("output_a")).getText(), is("長さ０です"));
+		assertThat(driver.findElement(By.id("output_b")).getText(), is("チェック中！"));
+		assertThat(driver.findElement(By.id("output_c")).getText(), is("チェック中！"));
+		assertThat(driver.findElement(By.id("field_Decision")).getText(),is("未確定です。"));
+
+
+		driver.findElement(By.name("side_a")).clear();
+
+		driver.findElement(By.name("side_a")).sendKeys("666\n");
+		assertThat(driver.findElement(By.name("side_a")).getAttribute("value"), is("666"));
+		assertThat(driver.findElement(By.id("output_a")).getText(), is("OK!"));
+		assertThat(driver.findElement(By.id("output_b")).getText(), is("OK!"));
+		assertThat(driver.findElement(By.id("output_c")).getText(), is("長さ０です。"));
+		assertThat(driver.findElement(By.id("field_Decision")).getText(),is("未確定です。"));
+
+		driver.findElement(By.name("side_c")).clear();
+
+		driver.findElement(By.name("side_c")).sendKeys("337\n");
+		assertThat(driver.findElement(By.name("side_c")).getAttribute("value"), is("337"));
+		assertThat(driver.findElement(By.id("output_a")).getText(), is("OK!"));
+		assertThat(driver.findElement(By.id("output_b")).getText(), is("OK!"));
+		assertThat(driver.findElement(By.id("output_c")).getText(), is("OK!"));
+
+		assertThat(driver.findElement(By.id("field_Decision")).getText(),is("二等辺三角形です"));
 
 	}
 
